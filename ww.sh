@@ -1,18 +1,19 @@
-ww is a function
-ww ()
-{
-    DOMNAME="$1";
-    GCRITERIA='serverhold';
-    cmd_whois='/usr/bin/whois';
-    if [ $# ]] < 1; then
-        echo "There is no parameter fo the 'whois' command!";
-        return 1;
-    fi;
-    RES=$($cmd_whois "${DOMNAME}" | grep -io "${GCRITERIA}" | head -1);
-    $cmd_whois "${DOMNAME}";
-    if [[ -z "${RES}" ]]; then
-        :;
-    else
-        echo -e "\e[31m Please Pay Attention to the Domain Status - ${RES}\e[0m";
-    fi
+function s() {
+ssh -o "UserKnownHostsFile=/dev/null" -o "StrictHostKeyChecking=no" "wh@server${1}.web-hosting.com" -p12789
+}
+ 
+function r() {
+ssh -o "UserKnownHostsFile=/dev/null" -o "StrictHostKeyChecking=no" "wh@host${1}.registrar-servers.com" -p12789
+}
+
+function rs() {
+ssh -o "UserKnownHostsFile=/dev/null" -o "StrictHostKeyChecking=no" "wh@host${1}.registrar-servers.com" -p12789
+}
+ 
+function p() {
+ssh -o "UserKnownHostsFile=/dev/null" -o "StrictHostKeyChecking=no" "wh@premium${1}.web-hosting.com" -p12789
+}
+
+function b() {
+ssh -o "UserKnownHostsFile=/dev/null" -o "StrictHostKeyChecking=no" "wh@business${1}.web-hosting.com" -p12789
 }
